@@ -4,14 +4,13 @@ interface Props {
     value: string
     onChange: (v: string) => void
     placeholder: string
-    ''
+    "aria-label": string
 }
 
-export default function SearchBar({value, onChange, placeholder = "Search Task...", "aria-label": ariaLabel = "Search tasks"}) {
-
+export default function SearchBar({value, onChange, placeholder = "Search Task...", "aria-label": ariaLabel = "Search tasks"}: Props) {
     return (
         <label>
-        <span >{ariaLabel} </span>
+        <span className="sr-only" >{ariaLabel} </span>
         <input
          type="search"
          value={value}
