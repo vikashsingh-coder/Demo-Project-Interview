@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useCallback, useEffect, useMemo, useState } from "react";
+import "./App.css";
+import ErrorBoundary from "./components/errorBoundry";
+import SearchBar from "./components/SearchBar";
+import { loadTodos, saveToDos } from "./utils/storage";
+import type { Todo } from "./types";
+import { useDebounce } from "./hooks/debounce";
+import { v4 as uuidv4 } from "uuid";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
+  const [search, setSearch] = useState("");
+  const debounced = useDebounce(search, 400);
+
+  // when ever some data change in todos hit the save function
+  useEffect(() => {
+    saveToDos(todos);
+  }, [todos]);
+
+  const addTodos = useCallback((text: string) => {
+    const newTodos: Todo = {
+      id: uuidv4(),
+      text: text,
+      completed: false,
+      createdAt: new Date().toISOString(),
+    };
+    setTodos((prev) => [...prev, newTodos]);
+  }, []);
+
+  const toggleTodos = (id: string) => {
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+    );
+  };
+
+  const deleteTodo = (id: string) => {
+    setTodos((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  const filtered = useMemo(() => {
+    const q = debounced.trim().toLowerCase();
+    if (!q) return todos;
+    return todos.filter((t) => t.text.toLowerCase().includes(q));
+  }, [todos, debounced]);
 
   return (
-    <>
+    <ErrorBoundary>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>React 19 to-do production</h1>
+        <SearchBar value={search} onChange={setSearch} />
+        <TodoInput onAdd={addTodos} />
+        <TodoList
+          todos={filtered}
+          onDelete={deleteTodo}
+          ontoggle={toggleTodos}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </ErrorBoundary>
+  );
 }
 
-export default App
+export default App;
