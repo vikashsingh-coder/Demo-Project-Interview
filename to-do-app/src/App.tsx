@@ -4,7 +4,7 @@ import ErrorBoundary from "./components/errorBoundry";
 import SearchBar from "./components/SearchBar";
 import { loadTodos, saveToDos } from "./utils/storage";
 import type { Todo } from "./types";
-import { useDebounce } from "./hooks/debounce";
+import useDebounce from "./hooks/debounce";
 import { v4 as uuidv4 } from "uuid";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
@@ -39,10 +39,10 @@ function App() {
     setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
-  const filtered = useMemo(() => {
+  const filtered = useMemo((): Todo[] => {
     const q = debounced.trim().toLowerCase();
     if (!q) return todos;
-    return todos.filter((t) => t.text.toLowerCase().includes(q));
+    return todos.filter((todo) => todo.text.toLowerCase().includes(q));
   }, [todos, debounced]);
 
   return (
