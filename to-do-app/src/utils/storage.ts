@@ -1,4 +1,4 @@
-import type { Todo } from "../types";
+import { type Todo } from "../types";
 
 export const loadTodos = (): Todo[] => {
   try {
