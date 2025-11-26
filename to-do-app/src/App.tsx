@@ -4,7 +4,7 @@ import ErrorBoundary from "./components/errorBoundry";
 import SearchBar from "./components/SearchBar";
 import { loadTodos, saveToDos } from "./utils/storage";
 import type { Todo } from "./types";
-import useDebounce from "./hooks/debounce";
+import { useDebounce } from "./hooks/useDebounce";
 import { v4 as uuidv4 } from "uuid";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";

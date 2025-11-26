@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 //   return debounce;
 // }
 
-const useDebounce = <T>(value: T, delay: number = 400) => {
+export const useDebounce = <T>(value: T, delay: number = 400) => {
   const [debounce, setDebounce] = useState<T>(value);
 
   useEffect(() => {
@@ -35,5 +35,3 @@ const useDebounce = <T>(value: T, delay: number = 400) => {
 
   return debounce;
 };
-
-export default useDebounce;
