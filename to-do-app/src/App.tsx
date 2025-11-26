@@ -47,8 +47,8 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div>
-        <h1>React 19 to-do production</h1>
+      <div style={{ maxWidth: 600, margin: "40px auto", padding: "20px" }}>
+        <h1>React 19 To-Do (Production Ready) </h1>
         <SearchBar value={search} onChange={setSearch} />
         <TodoInput onAdd={addTodos} />
         <TodoList
