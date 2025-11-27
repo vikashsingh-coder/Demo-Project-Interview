@@ -1,4 +1,4 @@
-import type { Todo } from "./../types.ts";
+import type { Todo } from "../types.ts";
 
 type Props = {
   todo: Todo;

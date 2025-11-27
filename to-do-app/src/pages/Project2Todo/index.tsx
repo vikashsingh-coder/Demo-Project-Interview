@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import "./App.css";
-import ErrorBoundary from "./components/errorBoundry";
-import SearchBar from "./pages/Project2Todo/components/SearchBar";
-import { loadTodos, saveToDos } from "./pages/Project2Todo/utils/storage";
-import type { Todo } from "./pages/Project2Todo/types";
+// import "./App.css";
+
+import SearchBar from "./components/SearchBar";
+import { loadTodos, saveToDos } from "./utils/storage";
+import type { Todo } from "./types";
 import { useDebounce } from "./hooks/useDebounce";
 import { v4 as uuidv4 } from "uuid";
-import TodoInput from "./pages/Project2Todo/components/TodoInput";
-import TodoList from "./pages/Project2Todo/components/TodoList";
+import TodoInput from "./components/TodoInput";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>(() => loadTodos());
@@ -46,18 +46,14 @@ function App() {
   }, [todos, debounced]);
 
   return (
-    <ErrorBoundary>
-      <div style={{ maxWidth: 600, margin: "40px auto", padding: "20px" }}>
-        <h1>React 19 To-Do (Production Ready) </h1>
-        <SearchBar value={search} onChange={setSearch} />
-        <TodoInput onAdd={addTodos} />
-        <TodoList
-          todos={filtered}
-          onDelete={deleteTodo}
-          ontoggle={toggleTodos}
-        />
-      </div>
-    </ErrorBoundary>
+    // <ErrorBoundary>
+    <div style={{ maxWidth: 600, margin: "40px auto", padding: "20px" }}>
+      <h1>React 19 To-Do (Production Ready) </h1>
+      <SearchBar value={search} onChange={setSearch} />
+      <TodoInput onAdd={addTodos} />
+      <TodoList todos={filtered} onDelete={deleteTodo} ontoggle={toggleTodos} />
+    </div>
+    // </ErrorBoundary>
   );
 }
 
