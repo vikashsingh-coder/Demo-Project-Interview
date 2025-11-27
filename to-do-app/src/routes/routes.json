@@ -1,5 +1,9 @@
 [
   {
+    "path": "/",
+    "folder": "Parent"
+  },
+  {
     "path": "/todo",
     "folder": "Project2Todo"
   },
