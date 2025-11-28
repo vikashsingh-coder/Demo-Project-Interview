@@ -1,11 +1,21 @@
 import { useTodoStore } from "../../../store/todo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function TodoZ() {
   //   const { addTodo } = useTodoStore();
   // Second way
-  const addTodo = useTodoStore((s) => s.addTodo);
+
   const [todo, setTodo] = useState("");
+  const addTodo = useTodoStore((s) => s.addTodo);
+  const fetchTodos = useTodoStore((s) => s.fetchTodos);
+  const isLoading = useTodoStore((s) => s.isloading);
+
+  useEffect(() => {
+    fetchTodos();
+  }, [fetchTodos]);
+
+  if (isLoading) return <h2>Loading...</h2>;
+
   return (
     <div>
       <input
