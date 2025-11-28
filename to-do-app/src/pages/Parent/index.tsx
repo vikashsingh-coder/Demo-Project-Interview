@@ -9,6 +9,9 @@ function Parent() {
         <li>
           <a href="/todo">Todo App</a>
         </li>
+        <li>
+          <a href="/todoz">Todo Zustand</a>
+        </li>
       </ul>
     </div>
   );

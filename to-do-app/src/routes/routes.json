@@ -10,5 +10,9 @@
   {
     "path": "/counter",
     "folder": "Project1Counter"
+  },
+  {
+    "path": "/todoz",
+    "folder": "Project3TodoZustand"
   }
 ]
