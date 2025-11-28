@@ -1,7 +1,9 @@
-import { useTodoStore } from "../../../store/todo";
+import { useAppStore } from "../../../store";
+// import { useTodoStore } from "../../../store/todo";
 
 export function TodoListZ() {
-  const { todos, toggleTodo } = useTodoStore();
+  // const { todos, toggleTodo } = useTodoStore();
+  const { todos, toggleTodo } = useAppStore();
   return (
     <div>
       <ul>
