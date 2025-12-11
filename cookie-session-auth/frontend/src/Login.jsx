@@ -9,12 +9,15 @@ function Login({ onLogin }) {
 
 
     const login = async () => {
+        // e.preventDefault()
         const res = await fetchWithCred("/login", {
             method: 'POST', body: JSON.stringify({
                 username,
                 password
             })
         })
+
+        console.log("response ", res)
 
         if (res.ok) {
             onLogin()
@@ -27,11 +30,9 @@ function Login({ onLogin }) {
     return (
         <>
             <h1>Login</h1>
-            <form>
-                <input type='text' placeholder='enter username' value={username} onChange={e => setUsername(e.target.value)} />
-                <input type='text' placeholder='enter password' value={password} onChange={e => setPassword(e.target.valueAsDate)} />
-                <button onClick={login}>Login</button>
-            </form>
+            <input type='text' placeholder='enter username' value={username} onChange={e => setUsername(e.target.value)} />
+            <input type='text' placeholder='enter password' value={password} onChange={e => setPassword(e.target.value)} />
+            <button type='button' onClick={login} >Login</button>
         </>
     )
 }
