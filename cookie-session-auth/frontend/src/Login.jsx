@@ -9,15 +9,12 @@ function Login({ onLogin }) {
 
 
     const login = async () => {
-        // e.preventDefault()
         const res = await fetchWithCred("/login", {
             method: 'POST', body: JSON.stringify({
                 username,
                 password
             })
         })
-
-        console.log("response ", res)
 
         if (res.ok) {
             onLogin()
