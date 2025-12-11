@@ -48,7 +48,7 @@ app.post("/logout", (req, res) => {
 })
 
 // auth check api
-app.post("/me", (req, res) => {
+app.get("/me", (req, res) => {
     if (req.session.user) {
         return res.json(req.session.user)
     }

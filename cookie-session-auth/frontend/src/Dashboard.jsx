@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { fetchWithCred } from "../utils"
 
-function Dashboard() {
+function Dashboard({ onLogout }) {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function Dashboard() {
         await fetchWithCred("/logout", {
             method: "POST"
         })
-        // onLogout()
+        onLogout()
     }
 
 
